@@ -187,8 +187,7 @@ class SlicerLeapModuleLogic:
     newTransform = vtk.vtkTransform()
     # Reorder and reorient to match the LeapMotion's coordinate system with RAS coordinate system
     newTransform.Translate(-fingerTipPosition[0], fingerTipPosition[2], fingerTipPosition[1])
-    transformMatrix=transform.GetMatrixTransformToParent()
-    transformMatrix.DeepCopy(newTransform.GetMatrix())
+    transform.SetMatrixTransformToParent(newTransform.GetMatrix())
   
   def onFrame(self):
     # Get the most recent frame
