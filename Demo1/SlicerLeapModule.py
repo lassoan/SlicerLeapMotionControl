@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 from __main__ import vtk, qt, ctk, slicer
 
@@ -5,7 +6,7 @@ from __main__ import vtk, qt, ctk, slicer
 # SlicerLeapModule
 #
 
-class SlicerLeapModule:
+class SlicerLeapModule(object):
   def __init__(self, parent):
     parent.title = "LeapMotion control"
     parent.categories = ["Gesture control"]
@@ -22,7 +23,7 @@ class SlicerLeapModule:
 # qSlicerLeapModuleWidget
 #
 
-class SlicerLeapModuleWidget:
+class SlicerLeapModuleWidget(object):
   def __init__(self, parent = None):
     if not parent:
       self.parent = slicer.qMRMLWidget()
@@ -143,7 +144,7 @@ class SlicerLeapModuleWidget:
       evalString = 'globals()["%s"].%sTest()' % (moduleName, moduleName)
       tester = eval(evalString)
       tester.runTest()
-    except Exception, e:
+    except Exception as e:
       import traceback
       traceback.print_exc()
       qt.QMessageBox.warning(slicer.util.mainWindow(), 
@@ -154,7 +155,7 @@ class SlicerLeapModuleWidget:
 # SlicerLeapModuleLogic
 #
 
-class SlicerLeapModuleLogic:
+class SlicerLeapModuleLogic(object):
   """This class implements all the actual computation in the module.
   """
   
@@ -170,7 +171,7 @@ class SlicerLeapModuleLogic:
   def setTransform(self, handIndex, fingerIndex, fingerTipPosition):
     
     transformName = "Hand%iFinger%i" % (handIndex+1,fingerIndex+1) # +1 because to have 1-based indexes for the hands and fingers
-    print transformName
+    print(transformName)
     transform = slicer.util.getNode(transformName)
 
     # Create the transform if does not exist yet
